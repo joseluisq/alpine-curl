@@ -1,0 +1,11 @@
+*.~
+**/*.tgz
+**/*.gz
+**/*.zip
+**/*.gzip
+**/*.zst
+**/*.log
+**/*.tar
+**/*.txt
+**/.DS_Store
+*.env
