@@ -1,6 +1,6 @@
 # NOTE: This is adapted from the official https://github.com/curl/curl-docker/blob/master/alpine/latest/Dockerfile
 
-FROM alpine:3.16.5 AS builder
+FROM alpine:3.17.3 AS builder
 
 ARG VERSION=0.0.0
 ENV VERSION=${VERSION}
@@ -67,7 +67,7 @@ RUN set -eux \
     && true
 
 # Deploy Alpine curl image
-FROM alpine:3.16.5
+FROM alpine:3.17.3
 
 LABEL Maintainer="Jose Quintana <joseluisq.net>" \
     Description="Unofficial Curl Alpine Linux."
