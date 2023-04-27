@@ -1,12 +1,14 @@
 # NOTE: This is adapted from the official https://github.com/curl/curl-docker/blob/master/alpine/latest/Dockerfile
 
+ARG VERSION=0.0.0
+ARG CURL_VERSION="8.0.1"
+
 FROM alpine:3.17.3 AS builder
 
-ARG VERSION=0.0.0
-ENV VERSION=${VERSION}
+ARG VERSION
 
 # https://github.com/curl/curl
-ARG CURL_VERSION="8.0.1"
+ARG CURL_VERSION
 ENV CURL_VERSION=${CURL_VERSION}
 
 # Install dependencies
@@ -44,7 +46,8 @@ RUN set -eux \
 # Build the tag version
 RUN set -eux \
     && mkdir -p /src/curl \
-    && curl -Lo curl.tar.gz https://github.com/curl/curl/releases/download/curl-8_0_1/curl-${CURL_VERSION}.tar.gz \
+    && ver=$(echo $CURL_VERSION | sed -e 's:\.:_:g') \
+    && curl -Lo curl.tar.gz https://github.com/curl/curl/releases/download/curl-${ver}/curl-${CURL_VERSION}.tar.gz \
     && tar xfz curl.tar.gz --strip-components=1 -C /src/curl \
     && true
 WORKDIR /src/curl
@@ -72,10 +75,12 @@ FROM alpine:3.17.3
 LABEL Maintainer="Jose Quintana <joseluisq.net>" \
     Description="Unofficial Curl Alpine Linux."
 
-ARG CURL_RELEASE_VERSION
-ARG CURL_GIT_REPO=https://github.com/curl/curl.git
+ARG VERSION
+ENV VERSION=${VERSION}
 
-ENV CURL_VERSION ${CURL_RELEASE_VERSION}
+# https://github.com/curl/curl
+ARG CURL_VERSION
+ENV CURL_VERSION=${CURL_VERSION}
 
 # Install dependencies
 RUN set -eux \
