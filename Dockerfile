@@ -1,9 +1,9 @@
 # NOTE: This is adapted from the official https://github.com/curl/curl-docker/blob/master/alpine/latest/Dockerfile
 
 ARG VERSION=0.0.0
-ARG CURL_VERSION="8.0.1"
+ARG CURL_VERSION="8.2.0"
 
-FROM alpine:3.17.3 AS builder
+FROM alpine:3.18.2 AS builder
 
 ARG VERSION
 
@@ -70,7 +70,7 @@ RUN set -eux \
     && true
 
 # Deploy Alpine curl image
-FROM alpine:3.17.3
+FROM alpine:3.18.2
 
 LABEL Maintainer="Jose Quintana <joseluisq.net>" \
     Description="Unofficial Curl Alpine Linux."
@@ -88,6 +88,7 @@ RUN set -eux \
         brotli \
         brotli-dev \
         ca-certificates \
+        libidn2 \
         libssh2 \
         nghttp2-dev \
         tzdata \
@@ -97,13 +98,20 @@ RUN set -eux \
     && true
 
 # Add non privileged curl user
-RUN addgroup -S curl_group && adduser -S curl_user -G curl_group
+RUN set -eux \
+    && addgroup -S curl_group \
+    && adduser -S curl_user -G curl_group \
+    && true
 
 # Set curl CA bundle
 COPY --from=builder "/cacert.pem" "/cacert.pem"
 ENV CURL_CA_BUNDLE="/cacert.pem"
 
 # Install curl built from builder
+RUN set -eux \
+    && rm -rf /usr/lib/libcurl.so.4 /usr/lib/libcurl.so \
+    && true
+
 COPY --from=builder "/alpine/usr/local/lib/libcurl.so.4.8.0" "/usr/lib/"
 COPY --from=builder "/alpine/usr/local/bin/curl" "/usr/bin/curl"
 COPY --from=builder "/alpine/usr/local/include/curl" "/usr/include/curl"
@@ -124,6 +132,6 @@ ENTRYPOINT ["/entrypoint.sh"]
 LABEL org.opencontainers.image.vendor="Jose Quintana" \
     org.opencontainers.image.url="https://github.com/joseluisq/alpine-curl" \
     org.opencontainers.image.title="curl" \
-    org.opencontainers.image.description="An unofficial Curl Docker image using latest Alpine Linux." \
+    org.opencontainers.image.description="An unofficial cURL Docker image using latest Alpine Linux." \
     org.opencontainers.image.version="${VERSION}" \
     org.opencontainers.image.documentation="https://github.com/joseluisq/alpine-curl"

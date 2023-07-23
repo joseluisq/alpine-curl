@@ -3,7 +3,7 @@
 > An unofficial [Curl](https://github.com/curl/curl) Docker image using latest [Alpine Linux](https://www.alpinelinux.org/).
 >
 
-**Note:** This Docker image exists to help test [static-web-server](https://github.com/static-web-server/static-web-server) using [Zstandard](http://facebook.github.io/zstd/). If you are looking for the official one, please then visit https://github.com/curl/curl-docker
+**Note:** This Docker image exists to help test [static-web-server](https://github.com/static-web-server/static-web-server) using [Zstandard](http://facebook.github.io/zstd/). If you are looking for the official one, then please visit https://github.com/curl/curl-container
 
 ## Usage
 
@@ -11,10 +11,10 @@ For example, print out curl release version, protocols and features.
 
 ```sh
 docker run --rm joseluisq/alpine-curl curl --version
-# curl 8.0.1 (aarch64-unknown-linux-musl) libcurl/8.0.1 OpenSSL/1.1.1t zlib/1.2.12 brotli/1.0.9 zstd/1.5.2 libssh2/1.10.0 nghttp2/1.47.0
-# Release-Date: 2023-03-20
+# curl 8.2.0 (aarch64-unknown-linux-musl) libcurl/8.2.0 OpenSSL/3.1.1 zlib/1.2.13 brotli/1.0.9 zstd/1.5.5 libidn2/2.3.4 libssh2/1.10.0 nghttp2/1.55.1
+# Release-Date: 2023-07-19
 # Protocols: dict file ftp ftps gopher gophers http https imap imaps mqtt pop3 pop3s rtsp scp sftp smb smbs smtp smtps telnet tftp
-# Features: alt-svc AsynchDNS brotli HSTS HTTP2 HTTPS-proxy IPv6 Largefile libz NTLM NTLM_WB SSL threadsafe TLS-SRP UnixSockets zstd
+# Features: alt-svc AsynchDNS brotli HSTS HTTP2 HTTPS-proxy IDN IPv6 Largefile libz NTLM NTLM_WB SSL threadsafe TLS-SRP UnixSockets zstd
 ```
 
 Or perform a request. For instance, using the latest [Zstandard](http://facebook.github.io/zstd/) compression algorithm.
@@ -38,7 +38,7 @@ docker run --rm joseluisq/alpine-curl \
 # x-frame-options: DENY
 # strict-transport-security: max-age=15552000; preload
 # content-type: text/html; charset="utf-8"
-# date: Wed, 19 Apr 2023 21:30:24 GMT
+# date: Sun, 23 Jul 2023 20:14:59 GMT
 # alt-svc: h3=":443"; ma=8640
 ```
 
