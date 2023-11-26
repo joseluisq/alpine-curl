@@ -1,9 +1,9 @@
 # NOTE: This is adapted from the official https://github.com/curl/curl-docker/blob/master/alpine/latest/Dockerfile
 
 ARG VERSION=0.0.0
-ARG CURL_VERSION="8.2.0"
+ARG CURL_VERSION="8.4.0"
 
-FROM alpine:3.18.2 AS builder
+FROM alpine:3.18.4 AS builder
 
 ARG VERSION
 
@@ -70,7 +70,7 @@ RUN set -eux \
     && true
 
 # Deploy Alpine curl image
-FROM alpine:3.18.2
+FROM alpine:3.18.4
 
 LABEL Maintainer="Jose Quintana <joseluisq.net>" \
     Description="Unofficial Curl Alpine Linux."
@@ -132,6 +132,6 @@ ENTRYPOINT ["/entrypoint.sh"]
 LABEL org.opencontainers.image.vendor="Jose Quintana" \
     org.opencontainers.image.url="https://github.com/joseluisq/alpine-curl" \
     org.opencontainers.image.title="curl" \
-    org.opencontainers.image.description="An unofficial cURL Docker image using latest Alpine Linux." \
+    org.opencontainers.image.description="An unofficial cURL Docker image using latest Alpine Linux with Zstandard support." \
     org.opencontainers.image.version="${VERSION}" \
     org.opencontainers.image.documentation="https://github.com/joseluisq/alpine-curl"

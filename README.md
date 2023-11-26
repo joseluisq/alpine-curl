@@ -1,13 +1,13 @@
 # Alpine cURL [![devel](https://github.com/joseluisq/alpine-curl/actions/workflows/devel.yml/badge.svg)](https://github.com/joseluisq/alpine-curl/actions/workflows/devel.yml) [![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/joseluisq/alpine-curl/latest)](https://hub.docker.com/r/joseluisq/alpine-curl/) [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/joseluisq/alpine-curl/latest)](https://hub.docker.com/r/joseluisq/alpine-curl/tags) [![Docker Image](https://img.shields.io/docker/pulls/joseluisq/alpine-curl.svg)](https://hub.docker.com/r/joseluisq/alpine-curl/)
 
-> An unofficial [Curl](https://github.com/curl/curl) Docker image using latest [Alpine Linux](https://www.alpinelinux.org/).
+> An unofficial [Curl](https://github.com/curl/curl) Docker image using latest [Alpine Linux](https://www.alpinelinux.org/) with [Zstandard](http://facebook.github.io/zstd/) support.
 >
 
 **Note:** This Docker image exists to help test [static-web-server](https://github.com/static-web-server/static-web-server) using [Zstandard](http://facebook.github.io/zstd/). If you are looking for the official one, then please visit https://github.com/curl/curl-container
 
 ## Usage
 
-For example, print out curl release version, protocols and features.
+For example, print out the curl release version, protocols and features.
 
 ```sh
 docker run --rm joseluisq/alpine-curl curl --version
